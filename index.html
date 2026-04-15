@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Seerat Rafique — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root {
+    --bg: #000; --text: #fff; --accent: #666; --border: #222;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;font-weight:300;overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    display:grid;grid-template-columns:1fr auto 1fr;
+    align-items:center;padding:0 2rem;height:60px;
+    background:rgba(0,0,0,0.9);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+}
+.nav-links{display:flex;gap:1.5rem;font-size:0.7rem;}
+.nav-links a{color:var(--text);text-decoration:none;text-transform:uppercase;letter-spacing:1px;}
+.nav-center{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.2em;}
+
+/* ── TICKER ── */
+.ticker{background:#111;border-bottom:1px solid var(--border);padding:0.8rem 0;overflow:hidden;white-space:nowrap;margin-top:60px;}
+.ticker-inner{display:inline-block;animation:tick 60s linear infinite;}
+.ticker-inner span{font-size:0.8rem;text-transform:uppercase;letter-spacing:2px;margin-right:1rem;}
+.tick-sep{color:#444;margin-right:1rem;}
+@keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ── ABOUT SECTION ── */
+.section-wrap { padding: 8rem 2rem; max-width: 1400px; margin: 0 auto; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+.about-header h1 {
+    font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 1; text-transform: uppercase; margin-bottom: 2rem;
+}
+.about-text { font-size: 1.1rem; line-height: 1.8; color: #bbb; }
+.about-highlight { color: #fff; font-weight: 400; }
+
+/* ── PRINCIPLES ── */
+.principles-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem;
+    border-top: 1px solid var(--border); padding-top: 3rem;
+}
+.principle-box h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #fff; margin-bottom: 0.8rem; }
+.principle-box p { font-size: 0.95rem; line-height: 1.6; color: #888; }
+
+/* ── GALLERY ── */
+.filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 4rem 0; }
+.fbtn { background: transparent; color: #555; border: 1px solid #222; padding: 0.5rem 1.5rem; cursor: pointer; text-transform: uppercase; font-size: 0.7rem; }
+.fbtn.active, .fbtn:hover { color: #fff; border-color: #fff; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 3rem; }
+.img-box { width: 100%; aspect-ratio: 4/5; background: #111; overflow: hidden; margin-bottom: 1rem; border: 1px solid #1a1a1a; }
+.img-box img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.5); transition: 0.6s; }
+.card:hover img { filter: grayscale(0); transform: scale(1.03); }
+
+/* ── CONTACT ── */
+.contact-wrap {
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1fr 1fr;
+    margin-top: 8rem;
+}
+.contact-left {
+    background: #000; color: #fff;
+    padding: 4rem 2rem;
+    border-right: 1px solid var(--border);
+}
+.contact-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 0.9; margin-bottom: 2rem;
+}
+.contact-desc {
+    font-size: 0.7rem; line-height: 1.9;
+    color: rgba(255,255,255,0.55); margin-bottom: 2rem;
+    max-width: 400px;
+}
+.contact-email {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem;
+    letter-spacing: 0.08em; color: #fff;
+    text-decoration: none;
+    border-bottom: 2px solid #fff; padding-bottom: 4px;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+.contact-phone {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem;
+    letter-spacing: 0.08em; color: #fff;
+    text-decoration: none;
+    display: block;
+}
+.contact-right { padding: 4rem 2rem; }
+.cspec {
+    padding: 1.5rem 0; border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: 120px 1fr; gap: 1rem; font-size: 0.75rem;
+}
+.cspec:last-child { border-bottom: none; }
+.cspec-label {
+    font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: #999; padding-top: 2px;
+}
+
+/* ── LIGHTBOX ── */
+#lb{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);z-index:2000;display:none;align-items:center;justify-content:center;padding:2rem;}
+#lb.open{display:flex;}
+.lb-content{max-width:1300px;width:100%;display:grid;grid-template-columns:1fr 400px;background:#000;border:1px solid #333;}
+#lbImg{width:100%;max-height:85vh;object-fit:contain;}
+.lb-info{padding:3rem; border-left: 1px solid #222;}
+
+@media(max-width:900px){
+    .about-grid, .contact-wrap, .lb-content { grid-template-columns: 1fr; }
+    .contact-left { border-right: none; border-bottom: 1px solid var(--border); }
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-links"><a href="#about">About</a><a href="#work">Work</a></div>
+    <div class="nav-center">SEERAT RAFIQUE</div>
+    <div class="nav-links" style="justify-content:flex-end"><a href="#hire">Hire</a><a href="#contact">Contact</a></div>
+</nav>
+
+<div class="ticker">
+    <div class="ticker-inner" id="tickerInner"></div>
+</div>
+
+<section class="section-wrap" id="about">
+    <div class="about-grid">
+        <div class="about-header">
+            <div style="font-size:0.7rem; text-transform:uppercase; color:var(--accent); letter-spacing:2px; margin-bottom:1rem">Biography / Intent</div>
+            <h1>Visual<br>Poetry In<br>The Dark.</h1>
+        </div>
+        <div>
+            <p class="about-text">
+                I am <span class="about-highlight">Seerat Rafique</span>, a 26-year-old <span class="about-highlight">Operations & Human Resources Professional</span> and visual artist based in Al Khobar.
+            </p>
+            <p class="about-text" style="margin-top:2rem">
+                With over 4 years of experience, I specialize in bridging technical business operations with strategic HR excellence. 
+                From managing payroll for 15,000+ employees at Style Textile to coordinating complex testing service workflows at ATECH, my career is defined by high accuracy and process improvement.
+            </p>
+            <p class="about-text" style="margin-top:1rem">
+                I started with an iPhone 4 in 2017 — not because I had the right gear, but because I couldn't stop noticing things worth capturing.
+                Self-taught over eight years across Pakistan and Saudi Arabia, I've photographed streets, sacred spaces, strangers, flowers, fog and everything in between. 
+                Photography isn't a hobby I'm trying to turn professional — it's been a serious creative practice for years. 
+                I'm now ready to bring that discipline into a studio or team environment, learn fast, and contribute from day one.
+            </p>
+        </div>
+    </div>
+
+    <div class="principles-grid">
+        <div class="principle-box"><h3>01 / The Technical Eye</h3><p>Mastery of smartphone optics and post-processing to simulate high-fidelity cinematic results.</p></div>
+        <div class="principle-box"><h3>02 / Narrative Light</h3><p>A commitment to high-contrast environments and the geometry of architectural spaces.</p></div>
+        <div class="principle-box"><h3>03 / Growth Mindset</h3><p>Ready to transition into professional studio workflows and collective team environments.</p></div>
+    </div>
+</section>
+
+<section class="section-wrap" id="work" style="padding-top:0">
+    <div class="filters">
+        <button class="fbtn active" onclick="filterGallery('all', this)">Archive</button>
+        <button class="fbtn" onclick="filterGallery('Architecture', this)">Architecture</button>
+        <button class="fbtn" onclick="filterGallery('Street', this)">Street</button>
+        <button class="fbtn" onclick="filterGallery('Macro', this)">Macro</button>
+    </div>
+    <div class="gallery" id="gallery"></div>
+</section>
+
+<section class="contact-wrap" id="contact">
+    <div class="contact-left">
+        <div class="contact-big">LET'S<br>CREATE<br>SOMETIME.</div>
+        <p class="contact-desc">
+            Available for visual storytelling, architectural documentation, and professional studio opportunities within Saudi Arabia and abroad.
+        </p>
+        <a href="mailto:Seeratrafique59@gmail.com" class="contact-email">SEERATRAFIQUE59@GMAIL.COM</a>
+        <a href="tel:+966598530215" class="contact-phone">+966 59 853 0215</a>
+    </div>
+    <div class="contact-right" id="hire">
+        <div class="cspec">
+            <div class="cspec-label">Location</div>
+            <div>Al Khobar, Eastern Province, KSA</div>
+        </div>
+        <div class="cspec">
+            <div class="cspec-label">Experience</div>
+            <div>4+ Years Operations & HR Management</div>
+        </div>
+        <div class="cspec">
+            <div class="cspec-label">Technical</div>
+            <div>SAP, Skyways LIMS, Oracle, Lightroom</div>
+        </div>
+        <div class="cspec">
+            <div class="cspec-label">Availability</div>
+            <div>Full-time Professional / Studio Roles</div>
+        </div>
+    </div>
+</section>
+
+<div id="lb" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="lb-content">
+        <img id="lbImg" src="">
+        <div class="lb-info">
+            <h2 id="lbTitle" style="font-family:'Playfair Display'; font-size:2rem; margin-bottom:1rem"></h2>
+            <div id="lbMeta" style="font-size:0.85rem; color:#888; line-height:1.8"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+const photos = [{'src': 'IMG_20210501_175523_Bokeh.jpg', 'title': 'Soft Profile', 'cat': 'Portrait', 'loc': 'Pakistan', 'gear': 'ONEPLUS 7T PRO MCLAREN EDITION', 'desc': 'A classic bokeh portrait focusing on a soft, expressive character.'}, {'src': '20250331_074622.jpg', 'title': 'Geometric Lines', 'cat': 'Architecture', 'loc': 'Al Khobar', 'gear': 'SONY XPERIA 1 IV', 'desc': 'Looking up at the repetitive balconies of modern residential structures.'}, {'src': '20240628_084215.jpg', 'title': 'Red Isolation', 'cat': 'Nature', 'loc': 'KSA', 'gear': 'SONY XPERIA 1 IV', 'desc': 'Using selective focus to highlight the vibrance of a solitary red flower.'}, {'src': '20240405_200604.jpg', 'title': 'Neon Grid', 'cat': 'Street', 'loc': 'Al Khobar', 'gear': 'SONY XPERIA 1 IV', 'desc': 'The vibrant energy of a tech-driven evening, captured in high-contrast blue.'}, {'src': '20250331_060828.jpg', 'title': 'Grand Scale', 'cat': 'Culture', 'loc': 'Makkah', 'gear': 'SONY XPERIA 1 IV', 'desc': 'Capturing the grand scale and light of a holy interior space.'}, {'src': 'IMG_20220406_171147.jpg', 'title': 'Floral Center', 'cat': 'Macro', 'loc': 'KSA', 'gear': 'ONEPLUS 7T PRO MCLAREN EDITION', 'desc': 'A top-down macro study of floral geometry and petal alignment.'}, {'src': '20250610_184101.jpg', 'title': 'Masjid Shadows', 'cat': 'Architecture', 'loc': 'Al Khobar', 'gear': 'SONY XPERIA 1 IV', 'desc': 'The clean white minaret of the Seaside Masjid against a hazy sky.'}, {'src': '20231231_132900.jpg', 'title': 'Feline Gaze', 'cat': 'Nature', 'loc': 'Eastern Province', 'gear': 'SONY XPERIA 1 IV', 'desc': 'Capturing the intense focus of a local cat during the soft light of dusk.'}, {'src': '20240329_132655.jpg', 'title': 'Soft Profile', 'cat': 'Portrait', 'loc': 'Saudi Arabia', 'gear': 'SONY XPERIA 1 IV', 'desc': 'A peaceful profile using natural light to define soft features.'}, {'src': '20240118_170029.jpg', 'title': 'Evening Flow', 'cat': 'Street', 'loc': 'Dammam', 'gear': 'SONY XPERIA 1 IV', 'desc': 'The cinematic glow of urban life through a soft evening atmosphere.'}, {'src': '20250331_060859.jpg', 'title': 'The Unity', 'cat': 'Culture', 'loc': 'Makkah', 'gear': 'SONY XPERIA 1 IV', 'desc': 'An aerial perspective of a massive religious gathering, showing scale and unity.'}, {'src': 'IMG_20220324_181316.jpg', 'title': 'Wild Thorns', 'cat': 'Macro', 'loc': 'Pakistan', 'gear': 'ONEPLUS 7T PRO MCLAREN EDITION', 'desc': 'Capturing the delicate thorns and soft petals of a wild purple flower.'}, {'src': '20260123_162738.jpg', 'title': 'The Dome', 'cat': 'Architecture', 'loc': 'Al Khobar', 'gear': 'SONY XPERIA 1 IV', 'desc': 'Capturing the crisp, clean white of modern mosque architecture.'}, {'src': '20240706_082729~3.jpg', 'title': 'Garden Stillness', 'cat': 'Nature', 'loc': 'Eastern Province', 'gear': 'SONY XPERIA 1 IV', 'desc': 'A minimalist view of a garden bench surrounded by lush greenery.'}, {'src': '20240116_142625.jpg', 'title': 'Quiet Wisdom', 'cat': 'Portrait', 'loc': 'Saudi Arabia', 'gear': 'SONY XPERIA 1 IV', 'desc': 'Candid street photography exploring the character and history in a face.'}, {'src': '20240605_084156.jpg', 'title': 'Aged Endurance', 'cat': 'Street', 'loc': 'Al Khobar', 'gear': 'SONY XPERIA 1 IV', 'desc': 'A study of mechanical texture and the passage of time on urban relics.'}, {'src': '20250331_071103.jpg', 'title': 'Towering Clock', 'cat': 'Architecture', 'loc': 'Makkah', 'gear': 'SONY XPERIA 1 IV', 'desc': 'The massive scale of the clock tower standing tall above the city.'}, {'src': '20240819_074844.jpg', 'title': 'Vanishing Point', 'cat': 'Landscape', 'loc': 'KSA', 'gear': 'SONY XPERIA 1 IV', 'desc': 'A perspective study of highway infrastructure disappearing into the haze.'}, {'src': '20240405_200929.jpg', 'title': 'Artificial Light', 'cat': 'Portrait', 'loc': 'Al Khobar', 'gear': 'SONY XPERIA 1 IV', 'desc': 'A modern portrait framed by the artificial light of a tech launch.'}, {'src': '20250331_072131.jpg', 'title': 'White Tents', 'cat': 'Culture', 'loc': 'Mina', 'gear': 'SONY XPERIA 1 IV', 'desc': 'Documenting the vast white tent cities during the pilgrimage season.'}, {'src': '20240205_184152.jpg', 'title': 'Lava Heart', 'cat': 'Macro', 'loc': 'KSA', 'gear': 'SONY XPERIA 1 IV', 'desc': 'High-magnification study of heat and glowing embers using the Xperia 1 IV.'}, {'src': '20250117_132710.jpg', 'title': 'Chrome Edge', 'cat': 'Automotive', 'loc': 'Al Khobar', 'gear': 'SONY XPERIA 1 IV', 'desc': 'Highlighting the clean, sharp lines of a modern vehicle in the city.'}, {'src': '20250923_151943.jpg', 'title': 'Marine White', 'cat': 'Landscape', 'loc': 'Marina', 'gear': 'SONY XPERIA 1 IV', 'desc': 'The peaceful symmetry of a boat resting in the morning light.'}, {'src': '20240731_083434.jpg', 'title': 'Shadow Work', 'cat': 'Portrait', 'loc': 'Saudi Arabia', 'gear': 'SONY XPERIA 1 IV', 'desc': 'A mysterious composition playing with shadows and partially hidden faces.'}, {'src': '20240329_135739.jpg', 'title': 'Spiritual Path', 'cat': 'Culture', 'loc': 'Makkah', 'gear': 'SONY XPERIA 1 IV', 'desc': 'A moment of faith and collective identity during a religious gathering.'}, {'src': '20240205_103912.jpg', 'title': 'Open Flame', 'cat': 'Culture', 'loc': 'KSA', 'gear': 'SONY XPERIA 1 IV', 'desc': 'Documenting the raw process of traditional cooking over an open flame.'}];
+function buildGallery(data) {
+    const g = document.getElementById('gallery');
+    g.innerHTML = '';
+    data.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<div class="img-box"><img src="${p.src}"></div><div style="font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase">${p.title}</div><div style="font-size:0.6rem; color:#444">${p.src}</div>`;
+        card.onclick = () => {
+            document.getElementById('lbImg').src = p.src;
+            document.getElementById('lbTitle').innerText = p.title;
+            document.getElementById('lbMeta').innerHTML = `<strong>CATEGORY:</strong> ${p.cat}<br><strong>LOC:</strong> ${p.loc}<br><br>${p.desc}<br><br><strong>GEAR USED:</strong> ${p.gear}`;
+            document.getElementById('lb').classList.add('open');
+        };
+        g.appendChild(card);
+    });
+}
+function filterGallery(cat, btn) {
+    document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    buildGallery(cat === 'all' ? photos : photos.filter(p => p.cat === cat));
+}
+const words = ['STREET','MACRO','ARCHITECTURE','AL KHOBAR','MAKKAH','PAKISTAN','XPERIA 1 IV','ONEPLUS 7T PRO','2017-2026'];
+let s = ''; for(let i=0;i<5;i++) words.forEach(w=>{ s+=`<span>${w}</span><span class="tick-sep">◆</span>`; });
+document.getElementById('tickerInner').innerHTML = s;
+buildGallery(photos);
+</script>
+</body>
+</html>
